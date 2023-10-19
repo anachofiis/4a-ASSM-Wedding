@@ -4,19 +4,26 @@ class ControladorFormularios
     /*
     REGISTRO
     */
-    static public function crtRegistro()
-    {
+    static public function crtRegistro(){
         if (isset($_POST["registerName"])) {
-            /*return $_POST["registerName"] . "<br>" . $_POST["registerEmail"] . "<br>" .$_POST["registerPassword"] . "<br>";*/
-            $tabla = "registros";
+            if (
+               preg_match('/^[a-zA-ZáéíóúñÑ]+$/',$_POST["registerName"]) && 
+               preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/',$_POST["registroEmail"]) && 
+               preg_match('/^[0-9a-zA-Z]+$/',$_POST["registerPassword"])){
+                
+                $tabla = "register";
 
-            $datos = array(
-                "nombre" => $_POST["registerName"],
-                "email" => $_POST["registerEmail"],
-                "password" => $_POST["registerPassword"]
-            );
-            $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
-            return $respuesta;
+                $datos = array(
+                    "nombre" => $_POST["registerName"],
+                    "email" => $_POST["registerEmail"],
+                    "password" => $_POST["registerPassword"]
+                );
+                $respuesta = ModeloFormularios::mdlRegistro($tabla, $datos);
+                return $respuesta;
+            } else {
+                $respuesta = "error";
+                return $respuesta;
+            }
         }
     }
     /**
@@ -142,5 +149,5 @@ class ControladorFormularios
 
 }
 
-?>
+
 

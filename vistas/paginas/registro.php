@@ -54,9 +54,9 @@
                     name="registerPassword">
             </div>
         </div>
-        <div class="flower__shape__two wow fadeInDown" data-wow-duration="4s">
-            <img src="assets/img/about/shape/flower2.png" alt="flower__image">
-         </div>
+    <div class="flower__shape wow fadeInUp" data-wow-duration="3s">
+        <img src="assets/img/about/shape/flower1.png" alt="flower__image">
+    </div>
         <?php /*
    $registro = new ControladorFormularios();
    $registro -> crtRegistro(); 
@@ -65,11 +65,21 @@
         if ($registro == "ok") {
             echo '<script>
                 if (window.history.replaceState){
-                    window.history.replaceState(null, null, window.location.gref);
+                    window.history.replaceState(null, null, window.location.href);
                 }
                 </script>';
 
             echo '<div class="alert-success"> El usuario ha sido registrado</div>';
+        }
+        if ($registro == "error"){
+            echo '<script>
+                if (window.history.replaceState){
+                    window.history.replaceState(null, null, window.location.href);
+                }
+                </script>';
+
+            echo '<div class="alert-danger">Eror no permite caracteres especiales. </div>';
+
         }
         ?>
         <button type="submit" class="btn btn-primary">Submit</button>
